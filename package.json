@@ -1,0 +1,36 @@
+{
+  "name": "testing2-prod",
+  "version": "1.0.0",
+  "description": "A production-ready HTML, CSS, JavaScript project",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=3000",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "format": "prettier --write .",
+    "build": "npm run lint && npm run minify",
+    "minify": "npx terser src/js/main.js -o dist/js/main.min.js && npx csso src/css/style.css -o dist/css/style.min.css"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "javascript",
+    "frontend"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0",
+    "live-server": "^1.2.2",
+    "serve": "^14.2.1",
+    "terser": "^5.24.0",
+    "csso-cli": "^4.0.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

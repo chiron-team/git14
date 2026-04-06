@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Testing2 Prod - A production-ready HTML, CSS, JavaScript project">
+    <meta name="keywords" content="html, css, javascript, frontend, web development">
+    <meta name="author" content="">
+    
+    <title>Testing2 Prod</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="src/assets/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="src/css/style.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__container">
+                <div class="nav__brand">
+                    <h1 class="nav__title">Testing2 Prod</h1>
+                </div>
+                <ul class="nav__menu">
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link nav__link--active">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#about" class="nav__link">About</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#features" class="nav__link">Features</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contact" class="nav__link">Contact</a>
+                    </li>
+                </ul>
+                <button class="nav__toggle" aria-label="Toggle navigation">
+                    <span class="nav__toggle-line"></span>
+                    <span class="nav__toggle-line"></span>
+                    <span class="nav__toggle-line"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero__content">
+                    <h1 class="hero__title">Welcome to Testing2 Prod</h1>
+                    <p class="hero__description">
+                        A modern, production-ready boilerplate for HTML, CSS, and JavaScript projects.
+                        Built with best practices and modern tooling.
+                    </p>
+                    <div class="hero__actions">
+                        <button class="btn btn--primary" id="getStartedBtn">Get Started</button>
+                        <button class="btn btn--secondary">Learn More</button>
+                    </div>
+                </div>
+                <div class="hero__visual">
+                    <div class="hero__graphic"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">About This Project</h2>
+                    <p class="section__description">
+                        This boilerplate provides a solid foundation for modern web development
+                        with vanilla HTML, CSS, and JavaScript.
+                    </p>
+                </div>
+                <div class="about__grid">
+                    <div class="about__card">
+                        <div class="about__icon">🚀</div>
+                        <h3 class="about__card-title">Fast & Modern</h3>
+                        <p class="about__card-description">
+                            Built with modern web standards and optimized for performance.
+                        </p>
+                    </div>
+                    <div class="about__card">
+                        <div class="about__icon">🛠️</div>
+                        <h3 class="about__card-title">Developer Friendly</h3>
+                        <p class="about__card-description">
+                            Includes linting, formatting, and development tools for a great DX.
+                        </p>
+                    </div>
+                    <div class="about__card">
+                        <div class="about__icon">📱</div>
+                        <h3 class="about__card-title">Responsive</h3>
+                        <p class="about__card-description">
+                            Mobile-first design that works perfectly on all devices.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Features</h2>
+                    <p class="section__description">
+                        Everything you need to build modern web applications.
+                    </p>
+                </div>
+                <div class="features__list">
+                    <div class="feature">
+                        <h3 class="feature__title">Modern CSS</h3>
+                        <p class="feature__description">CSS Grid, Flexbox, and custom properties</p>
+                    </div>
+                    <div class="feature">
+                        <h3 class="feature__title">ES6+ JavaScript</h3>
+                        <p class="feature__description">Modern JavaScript features and modules</p>
+                    </div>
+                    <div class="feature">
+                        <h3 class="feature__title">Production Ready</h3>
+                        <p class="feature__description">Optimized build process and deployment</p>
+                    </div>
+                    <div class="feature">
+                        <h3 class="feature__title">SEO Optimized</h3>
+                        <p class="feature__description">Semantic HTML and meta tags included</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Get In Touch</h2>
+                    <p class="section__description">
+                        Have questions or want to contribute? We'd love to hear from you.
+                    </p>
+                </div>
+                <div class="contact__content">
+                    <form class="contact__form" id="contactForm">
+                        <div class="form__group">
+                            <label for="name" class="form__label">Name</label>
+                            <input type="text" id="name" name="name" class="form__input" required>
+                        </div>
+                        <div class="form__group">
+                            <label for="email" class="form__label">Email</label>
+                            <input type="email" id="email" name="email" class="form__input" required>
+                        </div>
+                        <div class="form__group">
+                            <label for="message" class="form__label">Message</label>
+                            <textarea id="message" name="message" class="form__textarea" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <h3 class="footer__title">Testing2 Prod</h3>
+                    <p class="footer__description">
+                        Production-ready web development boilerplate.
+                    </p>
+                </div>
+                <div class="footer__links">
+                    <div class="footer__section">
+                        <h4 class="footer__section-title">Project</h4>
+                        <ul class="footer__list">
+                            <li><a href="#" class="footer__link">Documentation</a></li>
+                            <li><a href="#" class="footer__link">Examples</a></li>
+                            <li><a href="#" class="footer__link">GitHub</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__section">
+                        <h4 class="footer__section-title">Support</h4>
+                        <ul class="footer__list">
+                            <li><a href="#" class="footer__link">Help Center</a></li>
+                            <li><a href="#" class="footer__link">Community</a></li>
+                            <li><a href="#" class="footer__link">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2024 Testing2 Prod. Built with ❤️ for developers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="src/js/main.js"></script>
+</body>
+</html>

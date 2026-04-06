@@ -54,16 +54,25 @@
                         </li>
                     </ul>
 
-                    <button
-                        class="nav__toggle"
-                        aria-label="Toggle navigation"
-                        aria-controls="primaryNavigation"
-                        aria-expanded="false"
-                    >
-                        <span class="nav__toggle-line"></span>
-                        <span class="nav__toggle-line"></span>
-                        <span class="nav__toggle-line"></span>
-                    </button>
+                    <div class="nav__controls">
+                        <button
+                            id="themeToggle"
+                            class="theme-toggle"
+                            aria-label="Switch to dark theme"
+                            title="Switch to dark theme"
+                        >🌙</button>
+
+                        <button
+                            class="nav__toggle"
+                            aria-label="Toggle navigation"
+                            aria-controls="primaryNavigation"
+                            aria-expanded="false"
+                        >
+                            <span class="nav__toggle-line"></span>
+                            <span class="nav__toggle-line"></span>
+                            <span class="nav__toggle-line"></span>
+                        </button>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -108,6 +117,11 @@
                     <aside class="hero__panel" data-animate>
                         <p class="hero__panel-label">General store information</p>
                         <h2 class="hero__panel-title">Everything essential, clearly presented.</h2>
+
+                        <div class="placeholder-image placeholder-image--panel" aria-hidden="true">
+                            <span class="placeholder-image__label">Store front · coming soon</span>
+                        </div>
+
                         <ul class="hero__details">
                             <li>
                                 <span>Location</span>
@@ -230,6 +244,9 @@
                                 <span class="product-card__category">Textiles</span>
                             </div>
                             <h3 class="product-card__title">Soft Linen Throw</h3>
+                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
+                                <span class="placeholder-image__label">Product image</span>
+                            </div>
                             <p class="product-card__description">
                                 Lightweight texture for sofas, guest rooms, and reading corners.
                             </p>
@@ -249,6 +266,9 @@
                                 <span class="product-card__category">Kitchen</span>
                             </div>
                             <h3 class="product-card__title">Matte Ceramic Mug</h3>
+                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
+                                <span class="placeholder-image__label">Product image</span>
+                            </div>
                             <p class="product-card__description">
                                 A clean silhouette with a soft finish for coffee, tea, or display.
                             </p>
@@ -268,6 +288,9 @@
                                 <span class="product-card__category">Decor</span>
                             </div>
                             <h3 class="product-card__title">Oak Utility Tray</h3>
+                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
+                                <span class="placeholder-image__label">Product image</span>
+                            </div>
                             <p class="product-card__description">
                                 Designed for entryways, bedside tables, and serving small
                                 essentials.
@@ -288,6 +311,9 @@
                                 <span class="product-card__category">Lighting</span>
                             </div>
                             <h3 class="product-card__title">Linear Desk Lamp</h3>
+                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
+                                <span class="placeholder-image__label">Product image</span>
+                            </div>
                             <p class="product-card__description">
                                 Focused light and a compact footprint for calm, efficient
                                 workspaces.
@@ -308,6 +334,9 @@
                                 <span class="product-card__category">Storage</span>
                             </div>
                             <h3 class="product-card__title">Woven Storage Basket</h3>
+                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
+                                <span class="placeholder-image__label">Product image</span>
+                            </div>
                             <p class="product-card__description">
                                 A tidy solution for shelves, laundry corners, and everyday
                                 organization.
@@ -328,6 +357,9 @@
                                 <span class="product-card__category">Stationery</span>
                             </div>
                             <h3 class="product-card__title">Threadbound Journal</h3>
+                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
+                                <span class="placeholder-image__label">Product image</span>
+                            </div>
                             <p class="product-card__description">
                                 Minimal pages and durable binding for planning, sketching, and
                                 notes.

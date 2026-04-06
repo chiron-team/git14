@@ -105,7 +105,7 @@
                             <button type="submit" class="btn btn--primary">Search</button>
                         </form>
                         <p class="search-bar__status" id="searchStatus" aria-live="polite">
-                            Showing 6 curated products.
+                            Loading products…
                         </p>
 
                         <div class="hero__actions">
@@ -233,147 +233,46 @@
                         <a href="#contact" class="products__link">Need a recommendation?</a>
                     </div>
 
-                    <div class="products__grid">
-                        <article
-                            class="product-card"
-                            data-animate
-                            data-search="linen throw textiles neutral living room"
-                        >
-                            <div class="product-card__meta">
-                                <span class="product-card__tag">New</span>
-                                <span class="product-card__category">Textiles</span>
-                            </div>
-                            <h3 class="product-card__title">Soft Linen Throw</h3>
-                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
-                                <span class="placeholder-image__label">Product image</span>
-                            </div>
-                            <p class="product-card__description">
-                                Lightweight texture for sofas, guest rooms, and reading corners.
-                            </p>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">$48</span>
-                                <span class="product-card__status">In stock</span>
-                            </div>
-                        </article>
+                    <!-- Dynamic product grid — populated by ProductListings module -->
+                    <div
+                        class="products__grid"
+                        id="productGrid"
+                        aria-live="polite"
+                        aria-busy="true"
+                        aria-label="Product listings"
+                    ></div>
 
-                        <article
-                            class="product-card"
-                            data-animate
-                            data-search="ceramic mug kitchen tableware matte sand"
-                        >
-                            <div class="product-card__meta">
-                                <span class="product-card__tag">Bestseller</span>
-                                <span class="product-card__category">Kitchen</span>
-                            </div>
-                            <h3 class="product-card__title">Matte Ceramic Mug</h3>
-                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
-                                <span class="placeholder-image__label">Product image</span>
-                            </div>
-                            <p class="product-card__description">
-                                A clean silhouette with a soft finish for coffee, tea, or display.
-                            </p>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">$22</span>
-                                <span class="product-card__status">Low stock</span>
-                            </div>
-                        </article>
-
-                        <article
-                            class="product-card"
-                            data-animate
-                            data-search="oak tray wood decor serving organizer"
-                        >
-                            <div class="product-card__meta">
-                                <span class="product-card__tag">Handmade</span>
-                                <span class="product-card__category">Decor</span>
-                            </div>
-                            <h3 class="product-card__title">Oak Utility Tray</h3>
-                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
-                                <span class="placeholder-image__label">Product image</span>
-                            </div>
-                            <p class="product-card__description">
-                                Designed for entryways, bedside tables, and serving small
-                                essentials.
-                            </p>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">$36</span>
-                                <span class="product-card__status">In stock</span>
-                            </div>
-                        </article>
-
-                        <article
-                            class="product-card"
-                            data-animate
-                            data-search="desk lamp lighting workspace minimalist"
-                        >
-                            <div class="product-card__meta">
-                                <span class="product-card__tag">Studio pick</span>
-                                <span class="product-card__category">Lighting</span>
-                            </div>
-                            <h3 class="product-card__title">Linear Desk Lamp</h3>
-                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
-                                <span class="placeholder-image__label">Product image</span>
-                            </div>
-                            <p class="product-card__description">
-                                Focused light and a compact footprint for calm, efficient
-                                workspaces.
-                            </p>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">$74</span>
-                                <span class="product-card__status">In stock</span>
-                            </div>
-                        </article>
-
-                        <article
-                            class="product-card"
-                            data-animate
-                            data-search="storage basket woven natural organization"
-                        >
-                            <div class="product-card__meta">
-                                <span class="product-card__tag">Popular</span>
-                                <span class="product-card__category">Storage</span>
-                            </div>
-                            <h3 class="product-card__title">Woven Storage Basket</h3>
-                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
-                                <span class="placeholder-image__label">Product image</span>
-                            </div>
-                            <p class="product-card__description">
-                                A tidy solution for shelves, laundry corners, and everyday
-                                organization.
-                            </p>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">$31</span>
-                                <span class="product-card__status">In stock</span>
-                            </div>
-                        </article>
-
-                        <article
-                            class="product-card"
-                            data-animate
-                            data-search="journal notebook paper stationery gift"
-                        >
-                            <div class="product-card__meta">
-                                <span class="product-card__tag">Giftable</span>
-                                <span class="product-card__category">Stationery</span>
-                            </div>
-                            <h3 class="product-card__title">Threadbound Journal</h3>
-                            <div class="placeholder-image placeholder-image--product" aria-hidden="true">
-                                <span class="placeholder-image__label">Product image</span>
-                            </div>
-                            <p class="product-card__description">
-                                Minimal pages and durable binding for planning, sketching, and
-                                notes.
-                            </p>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">$18</span>
-                                <span class="product-card__status">In stock</span>
-                            </div>
-                        </article>
+                    <!-- Inline loading indicator shown while fetching -->
+                    <div
+                        class="products__loader"
+                        id="productLoadingIndicator"
+                        role="status"
+                        aria-hidden="true"
+                    >
+                        <span class="products__loader-dot"></span>
+                        <span class="products__loader-dot"></span>
+                        <span class="products__loader-dot"></span>
+                        <span class="sr-only">Loading products…</span>
                     </div>
 
-                    <div class="products__empty" id="productEmptyState" hidden>
-                        No products match your search yet. Try a broader term such as “decor” or
-                        “kitchen”.
+                    <!-- Empty / error state -->
+                    <div
+                        class="products__empty"
+                        id="productEmptyState"
+                        hidden
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+
+                    <!-- Pagination: load more -->
+                    <div class="products__pagination" id="loadMoreWrapper" hidden>
+                        <button
+                            type="button"
+                            class="btn btn--secondary products__load-more"
+                            id="loadMoreProducts"
+                        >
+                            Load more products
+                        </button>
                     </div>
                 </div>
             </section>

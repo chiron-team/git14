@@ -7,6 +7,7 @@ import { Navigation } from './modules/navigation.js';
 import { ContactForm } from './modules/contact-form.js';
 import { SmoothScroll } from './modules/smooth-scroll.js';
 import { ThemeToggle } from './modules/theme-toggle.js';
+import { ProductListings } from './modules/product-listings.js';
 import { debounce, throttle } from './utils/helpers.js';
 
 /**
@@ -57,6 +58,9 @@ class App {
         this.modules.contactForm = new ContactForm();
         this.modules.smoothScroll = new SmoothScroll();
 
+        // ProductListings owns search + pagination for the products section
+        this.modules.productListings = new ProductListings();
+
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
             this.modules.themeToggle = new ThemeToggle();
@@ -68,11 +72,6 @@ class App {
      */
     cacheElements() {
         this.elements.header = document.querySelector('.header');
-        this.elements.searchForm = document.getElementById('storeSearchForm');
-        this.elements.searchInput = document.getElementById('productSearch');
-        this.elements.searchStatus = document.getElementById('searchStatus');
-        this.elements.emptyState = document.getElementById('productEmptyState');
-        this.elements.productCards = Array.from(document.querySelectorAll('.product-card'));
     }
 
     /**
@@ -103,74 +102,14 @@ class App {
      * Initialize interactive components
      */
     initializeComponents() {
-        this.setupProductSearch();
         this.setupIntersectionObservers();
         this.initializeUIComponents();
         this.handleWindowScroll();
     }
 
     /**
-     * Set up product search interactions
-     */
-    setupProductSearch() {
-        const { searchForm, searchInput, searchStatus, emptyState, productCards } = this.elements;
-
-        if (!searchForm || !searchInput || !searchStatus || productCards.length === 0) {
-            return;
-        }
-
-        const runSearch = query => {
-            const normalizedQuery = query.trim().toLowerCase();
-            let visibleCount = 0;
-
-            productCards.forEach(card => {
-                const title = card.querySelector('.product-card__title')?.textContent || '';
-                const category = card.querySelector('.product-card__category')?.textContent || '';
-                const searchSource = card.dataset.search || '';
-                const searchableText = `${searchSource} ${title} ${category}`.toLowerCase();
-                const isMatch = normalizedQuery === '' || searchableText.includes(normalizedQuery);
-
-                card.classList.toggle('product-card--hidden', !isMatch);
-                card.hidden = !isMatch;
-                card.setAttribute('aria-hidden', String(!isMatch));
-
-                if (isMatch) {
-                    visibleCount += 1;
-                }
-            });
-
-            if (emptyState) {
-                emptyState.hidden = visibleCount > 0;
-            }
-
-            if (normalizedQuery === '') {
-                searchStatus.textContent = `Showing ${visibleCount} curated products.`;
-            } else if (visibleCount > 0) {
-                searchStatus.textContent = `Found ${visibleCount} product${visibleCount === 1 ? '' : 's'} for “${query.trim()}”.`;
-            } else {
-                searchStatus.textContent = `No products found for “${query.trim()}”.`;
-            }
-        };
-
-        const debouncedSearch = debounce(() => {
-            runSearch(searchInput.value);
-        }, 150);
-
-        searchInput.addEventListener('input', debouncedSearch);
-
-        searchForm.addEventListener('submit', event => {
-            event.preventDefault();
-            runSearch(searchInput.value);
-            this.trackEvent('product_search', {
-                query: searchInput.value.trim()
-            });
-        });
-
-        runSearch(searchInput.value);
-    }
-
-    /**
-     * Set up intersection observers for entrance animations
+     * Set up intersection observers for entrance animations on static elements.
+     * Dynamic product cards are observed inside ProductListings itself.
      */
     setupIntersectionObservers() {
         const animateElements = document.querySelectorAll('[data-animate]');

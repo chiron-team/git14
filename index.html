@@ -1,212 +1,443 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Testing2 Prod - A production-ready HTML, CSS, JavaScript project">
-    <meta name="keywords" content="html, css, javascript, frontend, web development">
-    <meta name="author" content="">
-    
-    <title>Testing2 Prod</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="src/assets/favicon.ico">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="src/css/style.css">
-    
-    <!-- Preload critical resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav__container">
-                <div class="nav__brand">
-                    <h1 class="nav__title">Testing2 Prod</h1>
-                </div>
-                <ul class="nav__menu">
-                    <li class="nav__item">
-                        <a href="#home" class="nav__link nav__link--active">Home</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#about" class="nav__link">About</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#features" class="nav__link">Features</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#contact" class="nav__link">Contact</a>
-                    </li>
-                </ul>
-                <button class="nav__toggle" aria-label="Toggle navigation">
-                    <span class="nav__toggle-line"></span>
-                    <span class="nav__toggle-line"></span>
-                    <span class="nav__toggle-line"></span>
-                </button>
-            </div>
-        </nav>
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Luma Store is a minimalist e-commerce home page for curated essentials, featured products, and seasonal promotions."
+        />
+        <meta
+            name="keywords"
+            content="e-commerce, minimalist store, home page, product listings, promotions"
+        />
+        <meta name="author" content="" />
 
-    <!-- Main Content -->
-    <main class="main">
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero__content">
-                    <h1 class="hero__title">Welcome to Testing2 Prod</h1>
-                    <p class="hero__description">
-                        A modern, production-ready boilerplate for HTML, CSS, and JavaScript projects.
-                        Built with best practices and modern tooling.
-                    </p>
-                    <div class="hero__actions">
-                        <button class="btn btn--primary" id="getStartedBtn">Get Started</button>
-                        <button class="btn btn--secondary">Learn More</button>
-                    </div>
-                </div>
-                <div class="hero__visual">
-                    <div class="hero__graphic"></div>
-                </div>
-            </div>
-        </section>
+        <title>Luma Store | Minimal Everyday Essentials</title>
 
-        <!-- About Section -->
-        <section id="about" class="about">
-            <div class="container">
-                <div class="section__header">
-                    <h2 class="section__title">About This Project</h2>
-                    <p class="section__description">
-                        This boilerplate provides a solid foundation for modern web development
-                        with vanilla HTML, CSS, and JavaScript.
-                    </p>
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="src/assets/favicon.ico" />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="src/css/style.css" />
+
+        <!-- Preload critical resources -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <nav class="nav">
+                <div class="container nav__container">
+                    <a href="#home" class="nav__brand" aria-label="Luma Store home">
+                        <span class="nav__eyebrow">Curated living</span>
+                        <span class="nav__title">Luma Store</span>
+                    </a>
+
+                    <ul class="nav__menu" id="primaryNavigation" aria-expanded="false">
+                        <li class="nav__item">
+                            <a href="#home" class="nav__link nav__link--active">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#store" class="nav__link">Store Info</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#products" class="nav__link">Products</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#contact" class="nav__link">Contact</a>
+                        </li>
+                    </ul>
+
+                    <button
+                        class="nav__toggle"
+                        aria-label="Toggle navigation"
+                        aria-controls="primaryNavigation"
+                        aria-expanded="false"
+                    >
+                        <span class="nav__toggle-line"></span>
+                        <span class="nav__toggle-line"></span>
+                        <span class="nav__toggle-line"></span>
+                    </button>
                 </div>
-                <div class="about__grid">
-                    <div class="about__card">
-                        <div class="about__icon">🚀</div>
-                        <h3 class="about__card-title">Fast & Modern</h3>
-                        <p class="about__card-description">
-                            Built with modern web standards and optimized for performance.
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Hero Section -->
+            <section id="home" class="hero">
+                <div class="container hero__layout">
+                    <div class="hero__content" data-animate>
+                        <span class="hero__eyebrow">Minimalist home view</span>
+                        <h1 class="hero__title">
+                            Calm shopping for thoughtful everyday essentials.
+                        </h1>
+                        <p class="hero__description">
+                            Discover a clean storefront with easy search, curated product
+                            highlights, and understated promotions designed to keep the focus on
+                            what matters.
                         </p>
-                    </div>
-                    <div class="about__card">
-                        <div class="about__icon">🛠️</div>
-                        <h3 class="about__card-title">Developer Friendly</h3>
-                        <p class="about__card-description">
-                            Includes linting, formatting, and development tools for a great DX.
+
+                        <form class="search-bar" id="storeSearchForm" role="search">
+                            <label for="productSearch" class="sr-only">Search products</label>
+                            <input
+                                type="search"
+                                id="productSearch"
+                                class="search-bar__input"
+                                placeholder="Search products, categories, or materials"
+                                autocomplete="off"
+                            />
+                            <button type="submit" class="btn btn--primary">Search</button>
+                        </form>
+                        <p class="search-bar__status" id="searchStatus" aria-live="polite">
+                            Showing 6 curated products.
                         </p>
-                    </div>
-                    <div class="about__card">
-                        <div class="about__icon">📱</div>
-                        <h3 class="about__card-title">Responsive</h3>
-                        <p class="about__card-description">
-                            Mobile-first design that works perfectly on all devices.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Features Section -->
-        <section id="features" class="features">
-            <div class="container">
-                <div class="section__header">
-                    <h2 class="section__title">Features</h2>
-                    <p class="section__description">
-                        Everything you need to build modern web applications.
-                    </p>
-                </div>
-                <div class="features__list">
-                    <div class="feature">
-                        <h3 class="feature__title">Modern CSS</h3>
-                        <p class="feature__description">CSS Grid, Flexbox, and custom properties</p>
+                        <div class="hero__actions">
+                            <a href="#products" class="btn btn--primary">Shop products</a>
+                            <a href="#store" class="btn btn--secondary">View store info</a>
+                        </div>
                     </div>
-                    <div class="feature">
-                        <h3 class="feature__title">ES6+ JavaScript</h3>
-                        <p class="feature__description">Modern JavaScript features and modules</p>
-                    </div>
-                    <div class="feature">
-                        <h3 class="feature__title">Production Ready</h3>
-                        <p class="feature__description">Optimized build process and deployment</p>
-                    </div>
-                    <div class="feature">
-                        <h3 class="feature__title">SEO Optimized</h3>
-                        <p class="feature__description">Semantic HTML and meta tags included</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="section__header">
-                    <h2 class="section__title">Get In Touch</h2>
-                    <p class="section__description">
-                        Have questions or want to contribute? We'd love to hear from you.
-                    </p>
-                </div>
-                <div class="contact__content">
-                    <form class="contact__form" id="contactForm">
-                        <div class="form__group">
-                            <label for="name" class="form__label">Name</label>
-                            <input type="text" id="name" name="name" class="form__input" required>
-                        </div>
-                        <div class="form__group">
-                            <label for="email" class="form__label">Email</label>
-                            <input type="email" id="email" name="email" class="form__input" required>
-                        </div>
-                        <div class="form__group">
-                            <label for="message" class="form__label">Message</label>
-                            <textarea id="message" name="message" class="form__textarea" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn--primary btn--full">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__content">
-                <div class="footer__brand">
-                    <h3 class="footer__title">Testing2 Prod</h3>
-                    <p class="footer__description">
-                        Production-ready web development boilerplate.
-                    </p>
-                </div>
-                <div class="footer__links">
-                    <div class="footer__section">
-                        <h4 class="footer__section-title">Project</h4>
-                        <ul class="footer__list">
-                            <li><a href="#" class="footer__link">Documentation</a></li>
-                            <li><a href="#" class="footer__link">Examples</a></li>
-                            <li><a href="#" class="footer__link">GitHub</a></li>
+                    <aside class="hero__panel" data-animate>
+                        <p class="hero__panel-label">General store information</p>
+                        <h2 class="hero__panel-title">Everything essential, clearly presented.</h2>
+                        <ul class="hero__details">
+                            <li>
+                                <span>Location</span>
+                                <strong>18 Market Lane, Portland</strong>
+                            </li>
+                            <li>
+                                <span>Hours</span>
+                                <strong>Mon–Sat · 10:00 AM to 7:00 PM</strong>
+                            </li>
+                            <li>
+                                <span>Shipping</span>
+                                <strong>Free over $80 with easy 30-day returns</strong>
+                            </li>
+                            <li>
+                                <span>Support</span>
+                                <strong>Concierge help within one business day</strong>
+                            </li>
                         </ul>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- Promotional Banners -->
+            <section class="promo" aria-label="Promotional banners">
+                <div class="container promo__grid">
+                    <article class="promo__card promo__card--highlight" data-animate>
+                        <p class="promo__label">Seasonal offer</p>
+                        <h2 class="promo__title">20% off workspace essentials through Sunday.</h2>
+                        <p class="promo__text">
+                            Clean desk accessories, neutral organizers, and simple lighting.
+                        </p>
+                    </article>
+
+                    <article class="promo__card" data-animate>
+                        <p class="promo__label">Delivery perk</p>
+                        <h2 class="promo__title">Free shipping on orders over $80.</h2>
+                        <p class="promo__text">
+                            A simple checkout experience with straightforward returns.
+                        </p>
+                    </article>
+
+                    <article class="promo__card" data-animate>
+                        <p class="promo__label">In-store pickup</p>
+                        <h2 class="promo__title">Reserve online and collect the same day.</h2>
+                        <p class="promo__text">
+                            Perfect for gifts, home refreshes, and quick restocks.
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Store Information Section -->
+            <section id="store" class="store">
+                <div class="container">
+                    <div class="section__header" data-animate>
+                        <h2 class="section__title">Store information</h2>
+                        <p class="section__description">
+                            Luma Store focuses on calm presentation, clear service details, and
+                            everyday items chosen for durability, function, and visual simplicity.
+                        </p>
                     </div>
-                    <div class="footer__section">
-                        <h4 class="footer__section-title">Support</h4>
-                        <ul class="footer__list">
-                            <li><a href="#" class="footer__link">Help Center</a></li>
-                            <li><a href="#" class="footer__link">Community</a></li>
-                            <li><a href="#" class="footer__link">Contact</a></li>
-                        </ul>
+
+                    <div class="store__grid">
+                        <article class="store__card" data-animate>
+                            <p class="store__card-label">About</p>
+                            <h3 class="store__card-title">Curated for practical living</h3>
+                            <p class="store__card-text">
+                                Our collection centers on versatile home goods, lightweight
+                                textiles, and desk essentials that fit naturally into modern spaces.
+                            </p>
+                        </article>
+
+                        <article class="store__card" data-animate>
+                            <p class="store__card-label">Visit</p>
+                            <h3 class="store__card-title">A simple showroom experience</h3>
+                            <p class="store__card-text">
+                                Find us downtown with quiet browsing hours, product guidance on
+                                request, and complimentary gift wrapping for selected orders.
+                            </p>
+                        </article>
+
+                        <article class="store__card" data-animate>
+                            <p class="store__card-label">Service</p>
+                            <h3 class="store__card-title">Transparent shipping and returns</h3>
+                            <p class="store__card-text">
+                                Every order includes tracking, careful packaging, and a 30-day
+                                return window so shoppers can buy with confidence.
+                            </p>
+                        </article>
                     </div>
                 </div>
-            </div>
-            <div class="footer__bottom">
-                <p class="footer__copyright">
-                    &copy; 2024 Testing2 Prod. Built with ❤️ for developers.
+            </section>
+
+            <!-- Product Listings -->
+            <section id="products" class="products">
+                <div class="container">
+                    <div class="section__header" data-animate>
+                        <h2 class="section__title">Featured products</h2>
+                        <p class="section__description">
+                            A minimalist product grid with room for categories, pricing, and short
+                            descriptions.
+                        </p>
+                    </div>
+
+                    <div class="products__toolbar" data-animate>
+                        <p class="products__summary">
+                            Browse neutral tones, tactile materials, and small-batch favorites.
+                        </p>
+                        <a href="#contact" class="products__link">Need a recommendation?</a>
+                    </div>
+
+                    <div class="products__grid">
+                        <article
+                            class="product-card"
+                            data-animate
+                            data-search="linen throw textiles neutral living room"
+                        >
+                            <div class="product-card__meta">
+                                <span class="product-card__tag">New</span>
+                                <span class="product-card__category">Textiles</span>
+                            </div>
+                            <h3 class="product-card__title">Soft Linen Throw</h3>
+                            <p class="product-card__description">
+                                Lightweight texture for sofas, guest rooms, and reading corners.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">$48</span>
+                                <span class="product-card__status">In stock</span>
+                            </div>
+                        </article>
+
+                        <article
+                            class="product-card"
+                            data-animate
+                            data-search="ceramic mug kitchen tableware matte sand"
+                        >
+                            <div class="product-card__meta">
+                                <span class="product-card__tag">Bestseller</span>
+                                <span class="product-card__category">Kitchen</span>
+                            </div>
+                            <h3 class="product-card__title">Matte Ceramic Mug</h3>
+                            <p class="product-card__description">
+                                A clean silhouette with a soft finish for coffee, tea, or display.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">$22</span>
+                                <span class="product-card__status">Low stock</span>
+                            </div>
+                        </article>
+
+                        <article
+                            class="product-card"
+                            data-animate
+                            data-search="oak tray wood decor serving organizer"
+                        >
+                            <div class="product-card__meta">
+                                <span class="product-card__tag">Handmade</span>
+                                <span class="product-card__category">Decor</span>
+                            </div>
+                            <h3 class="product-card__title">Oak Utility Tray</h3>
+                            <p class="product-card__description">
+                                Designed for entryways, bedside tables, and serving small
+                                essentials.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">$36</span>
+                                <span class="product-card__status">In stock</span>
+                            </div>
+                        </article>
+
+                        <article
+                            class="product-card"
+                            data-animate
+                            data-search="desk lamp lighting workspace minimalist"
+                        >
+                            <div class="product-card__meta">
+                                <span class="product-card__tag">Studio pick</span>
+                                <span class="product-card__category">Lighting</span>
+                            </div>
+                            <h3 class="product-card__title">Linear Desk Lamp</h3>
+                            <p class="product-card__description">
+                                Focused light and a compact footprint for calm, efficient
+                                workspaces.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">$74</span>
+                                <span class="product-card__status">In stock</span>
+                            </div>
+                        </article>
+
+                        <article
+                            class="product-card"
+                            data-animate
+                            data-search="storage basket woven natural organization"
+                        >
+                            <div class="product-card__meta">
+                                <span class="product-card__tag">Popular</span>
+                                <span class="product-card__category">Storage</span>
+                            </div>
+                            <h3 class="product-card__title">Woven Storage Basket</h3>
+                            <p class="product-card__description">
+                                A tidy solution for shelves, laundry corners, and everyday
+                                organization.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">$31</span>
+                                <span class="product-card__status">In stock</span>
+                            </div>
+                        </article>
+
+                        <article
+                            class="product-card"
+                            data-animate
+                            data-search="journal notebook paper stationery gift"
+                        >
+                            <div class="product-card__meta">
+                                <span class="product-card__tag">Giftable</span>
+                                <span class="product-card__category">Stationery</span>
+                            </div>
+                            <h3 class="product-card__title">Threadbound Journal</h3>
+                            <p class="product-card__description">
+                                Minimal pages and durable binding for planning, sketching, and
+                                notes.
+                            </p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">$18</span>
+                                <span class="product-card__status">In stock</span>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="products__empty" id="productEmptyState" hidden>
+                        No products match your search yet. Try a broader term such as “decor” or
+                        “kitchen”.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact">
+                <div class="container">
+                    <div class="section__header" data-animate>
+                        <h2 class="section__title">Visit or contact the store</h2>
+                        <p class="section__description">
+                            Reach out for product recommendations, pickup requests, or store
+                            assistance.
+                        </p>
+                    </div>
+
+                    <div class="contact__content">
+                        <div class="contact__panel" data-animate>
+                            <p class="contact__panel-label">Support</p>
+                            <h3 class="contact__panel-title">Need help choosing the right item?</h3>
+                            <p class="contact__panel-text">
+                                We reply within one business day and can help with styling
+                                suggestions, material details, order questions, or pickup timing.
+                            </p>
+                            <ul class="contact__details">
+                                <li>
+                                    <span>Email</span>
+                                    <strong>hello@lumastore.example</strong>
+                                </li>
+                                <li>
+                                    <span>Phone</span>
+                                    <strong>(503) 555-0184</strong>
+                                </li>
+                                <li>
+                                    <span>Hours</span>
+                                    <strong>Monday–Saturday, 10:00 AM–7:00 PM</strong>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <form class="contact__form" id="contactForm" data-animate>
+                            <div class="form__group">
+                                <label for="name" class="form__label">Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    class="form__input"
+                                    required
+                                />
+                            </div>
+                            <div class="form__group">
+                                <label for="email" class="form__label">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    class="form__input"
+                                    required
+                                />
+                            </div>
+                            <div class="form__group">
+                                <label for="message" class="form__label">Message</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    class="form__textarea"
+                                    rows="5"
+                                    required
+                                ></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full">
+                                Send message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer__content">
+                <div>
+                    <p class="footer__eyebrow">Luma Store</p>
+                    <h3 class="footer__title">
+                        Minimal shopping with clear information and calm presentation.
+                    </h3>
+                </div>
+                <p class="footer__description">
+                    © 2024 Luma Store. Curated essentials, promotional banners, product discovery,
+                    and store details presented in a clean, minimalist layout.
                 </p>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Scripts -->
-    <script src="src/js/main.js"></script>
-</body>
+        <!-- Scripts -->
+        <script type="module" src="src/js/main.js"></script>
+    </body>
 </html>

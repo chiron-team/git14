@@ -25,7 +25,6 @@ export class Navigation {
 
         this.setupEventListeners();
         this.setupActiveLink();
-        this.setupSmoothScrolling();
     }
 
     /**
@@ -43,14 +42,14 @@ export class Navigation {
         });
 
         // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
+        document.addEventListener('click', e => {
             if (this.isMenuOpen && !this.nav.contains(e.target)) {
                 this.closeMenu();
             }
         });
 
         // Handle escape key
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && this.isMenuOpen) {
                 this.closeMenu();
                 this.navToggle.focus();
@@ -70,7 +69,7 @@ export class Navigation {
      */
     setupActiveLink() {
         const sections = document.querySelectorAll('section[id]');
-        
+
         if (sections.length === 0) {
             return;
         }
@@ -80,7 +79,7 @@ export class Navigation {
             rootMargin: '-80px 0px -80px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 const id = entry.target.getAttribute('id');
                 const navLink = document.querySelector(`a[href="#${id}"]`);
@@ -110,18 +109,18 @@ export class Navigation {
     setupSmoothScrolling() {
         this.navLinks.forEach(link => {
             const href = link.getAttribute('href');
-            
+
             if (href && href.startsWith('#')) {
-                link.addEventListener('click', (e) => {
+                link.addEventListener('click', e => {
                     e.preventDefault();
-                    
+
                     const targetId = href.substring(1);
                     const targetElement = document.getElementById(targetId);
-                    
+
                     if (targetElement) {
                         const headerHeight = this.nav.offsetHeight;
                         const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                        
+
                         window.scrollTo({
                             top: targetPosition,
                             behavior: 'smooth'
@@ -160,7 +159,7 @@ export class Navigation {
 
         // Focus management
         this.navMenu.setAttribute('aria-expanded', 'true');
-        
+
         // Focus first menu item
         const firstLink = this.navMenu.querySelector('.nav__link');
         if (firstLink) {
@@ -195,7 +194,7 @@ export class Navigation {
      */
     animateToggleLines(isOpen) {
         const lines = this.navToggle.querySelectorAll('.nav__toggle-line');
-        
+
         if (lines.length !== 3) return;
 
         if (isOpen) {
@@ -244,7 +243,7 @@ export class Navigation {
     updateActiveLink(activeId) {
         this.navLinks.forEach(link => {
             link.classList.remove('nav__link--active');
-            
+
             const href = link.getAttribute('href');
             if (href === `#${activeId}`) {
                 link.classList.add('nav__link--active');

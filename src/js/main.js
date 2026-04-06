@@ -1,9 +1,8 @@
 /**
  * Main JavaScript Entry Point
- * Testing2 Prod - Production Ready Boilerplate
+ * Luma Store - Minimalist E-commerce Home View
  */
 
-// Import modules
 import { Navigation } from './modules/navigation.js';
 import { ContactForm } from './modules/contact-form.js';
 import { SmoothScroll } from './modules/smooth-scroll.js';
@@ -12,11 +11,12 @@ import { debounce, throttle } from './utils/helpers.js';
 
 /**
  * Main App Class
- * Handles application initialization and coordination between modules
+ * Handles application initialization and shared UI interactions
  */
 class App {
     constructor() {
         this.modules = {};
+        this.elements = {};
         this.isInitialized = false;
     }
 
@@ -30,27 +30,21 @@ class App {
         }
 
         try {
-            // Show loading state if needed
             this.showLoadingState();
+            document.documentElement.classList.add('js-enabled');
 
-            // Initialize core modules
             await this.initializeModules();
-
-            // Set up event listeners
+            this.cacheElements();
             this.setupEventListeners();
-
-            // Initialize components
             this.initializeComponents();
 
-            // Mark as initialized
             this.isInitialized = true;
-
-            // Hide loading state
             this.hideLoadingState();
 
             console.log('✅ App initialized successfully');
         } catch (error) {
             console.error('❌ Error initializing app:', error);
+            this.hideLoadingState();
             this.handleInitializationError(error);
         }
     }
@@ -59,16 +53,10 @@ class App {
      * Initialize all modules
      */
     async initializeModules() {
-        // Initialize navigation
         this.modules.navigation = new Navigation();
-        
-        // Initialize contact form
         this.modules.contactForm = new ContactForm();
-        
-        // Initialize smooth scroll
         this.modules.smoothScroll = new SmoothScroll();
-        
-        // Initialize theme toggle (if element exists)
+
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
             this.modules.themeToggle = new ThemeToggle();
@@ -76,31 +64,38 @@ class App {
     }
 
     /**
+     * Cache frequently used elements
+     */
+    cacheElements() {
+        this.elements.header = document.querySelector('.header');
+        this.elements.searchForm = document.getElementById('storeSearchForm');
+        this.elements.searchInput = document.getElementById('productSearch');
+        this.elements.searchStatus = document.getElementById('searchStatus');
+        this.elements.emptyState = document.getElementById('productEmptyState');
+        this.elements.productCards = Array.from(document.querySelectorAll('.product-card'));
+    }
+
+    /**
      * Set up global event listeners
      */
     setupEventListeners() {
-        // Window resize handler
         const handleResize = debounce(() => {
             this.handleWindowResize();
         }, 250);
 
-        window.addEventListener('resize', handleResize);
-
-        // Scroll handler for header behavior
         const handleScroll = throttle(() => {
             this.handleWindowScroll();
         }, 16);
 
+        window.addEventListener('resize', handleResize);
         window.addEventListener('scroll', handleScroll, { passive: true });
 
-        // Handle page visibility changes
         document.addEventListener('visibilitychange', () => {
             this.handleVisibilityChange();
         });
 
-        // Handle keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            this.handleKeyboardNavigation(e);
+        document.addEventListener('keydown', event => {
+            this.handleKeyboardNavigation(event);
         });
     }
 
@@ -108,82 +103,126 @@ class App {
      * Initialize interactive components
      */
     initializeComponents() {
-        // Get Started button functionality
-        const getStartedBtn = document.getElementById('getStartedBtn');
-        if (getStartedBtn) {
-            getStartedBtn.addEventListener('click', this.handleGetStarted.bind(this));
-        }
-
-        // Add animation observers
+        this.setupProductSearch();
         this.setupIntersectionObservers();
-
-        // Initialize any tooltips or modals
         this.initializeUIComponents();
+        this.handleWindowScroll();
     }
 
     /**
-     * Handle Get Started button click
+     * Set up product search interactions
      */
-    handleGetStarted() {
-        // Scroll to contact section or show welcome modal
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
+    setupProductSearch() {
+        const { searchForm, searchInput, searchStatus, emptyState, productCards } = this.elements;
 
-        // Track interaction
-        this.trackEvent('get_started_clicked');
-    }
-
-    /**
-     * Set up intersection observers for animations
-     */
-    setupIntersectionObservers() {
-        if (!window.IntersectionObserver) {
-            console.warn('IntersectionObserver not supported');
+        if (!searchForm || !searchInput || !searchStatus || productCards.length === 0) {
             return;
         }
 
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        const runSearch = query => {
+            const normalizedQuery = query.trim().toLowerCase();
+            let visibleCount = 0;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    observer.unobserve(entry.target);
+            productCards.forEach(card => {
+                const title = card.querySelector('.product-card__title')?.textContent || '';
+                const category = card.querySelector('.product-card__category')?.textContent || '';
+                const searchSource = card.dataset.search || '';
+                const searchableText = `${searchSource} ${title} ${category}`.toLowerCase();
+                const isMatch = normalizedQuery === '' || searchableText.includes(normalizedQuery);
+
+                card.classList.toggle('product-card--hidden', !isMatch);
+                card.hidden = !isMatch;
+                card.setAttribute('aria-hidden', String(!isMatch));
+
+                if (isMatch) {
+                    visibleCount += 1;
                 }
             });
-        }, observerOptions);
 
-        // Observe elements that should animate in
-        const animateElements = document.querySelectorAll('.about__card, .feature, .hero__content');
-        animateElements.forEach(el => {
-            observer.observe(el);
+            if (emptyState) {
+                emptyState.hidden = visibleCount > 0;
+            }
+
+            if (normalizedQuery === '') {
+                searchStatus.textContent = `Showing ${visibleCount} curated products.`;
+            } else if (visibleCount > 0) {
+                searchStatus.textContent = `Found ${visibleCount} product${visibleCount === 1 ? '' : 's'} for “${query.trim()}”.`;
+            } else {
+                searchStatus.textContent = `No products found for “${query.trim()}”.`;
+            }
+        };
+
+        const debouncedSearch = debounce(() => {
+            runSearch(searchInput.value);
+        }, 150);
+
+        searchInput.addEventListener('input', debouncedSearch);
+
+        searchForm.addEventListener('submit', event => {
+            event.preventDefault();
+            runSearch(searchInput.value);
+            this.trackEvent('product_search', {
+                query: searchInput.value.trim()
+            });
+        });
+
+        runSearch(searchInput.value);
+    }
+
+    /**
+     * Set up intersection observers for entrance animations
+     */
+    setupIntersectionObservers() {
+        const animateElements = document.querySelectorAll('[data-animate]');
+
+        if (animateElements.length === 0) {
+            return;
+        }
+
+        if (!window.IntersectionObserver) {
+            animateElements.forEach(element => {
+                element.classList.add('animate-in');
+            });
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.15,
+                rootMargin: '0px 0px -40px 0px'
+            }
+        );
+
+        animateElements.forEach(element => {
+            observer.observe(element);
         });
     }
 
     /**
-     * Initialize UI components like tooltips, modals, etc.
+     * Initialize UI helpers
      */
     initializeUIComponents() {
-        // Add loading states to buttons
         this.addButtonLoadingStates();
-
-        // Initialize any custom UI components
         this.initializeCustomComponents();
     }
 
     /**
-     * Add loading states to form submit buttons
+     * Add loading state support to submit buttons
      */
     addButtonLoadingStates() {
         const submitButtons = document.querySelectorAll('button[type="submit"]');
         submitButtons.forEach(button => {
-            const originalText = button.textContent;
-            button.setAttribute('data-original-text', originalText);
+            if (!button.hasAttribute('data-original-text')) {
+                button.setAttribute('data-original-text', button.textContent.trim());
+            }
         });
     }
 
@@ -191,7 +230,6 @@ class App {
      * Initialize custom components
      */
     initializeCustomComponents() {
-        // Add any custom component initialization here
         console.log('Custom components initialized');
     }
 
@@ -199,7 +237,6 @@ class App {
      * Handle window resize events
      */
     handleWindowResize() {
-        // Update any size-dependent calculations
         if (this.modules.navigation) {
             this.modules.navigation.handleResize();
         }
@@ -209,15 +246,11 @@ class App {
      * Handle window scroll events
      */
     handleWindowScroll() {
+        const { header } = this.elements;
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const header = document.querySelector('.header');
 
         if (header) {
-            if (scrollTop > 100) {
-                header.classList.add('header--scrolled');
-            } else {
-                header.classList.remove('header--scrolled');
-            }
+            header.classList.toggle('header--scrolled', scrollTop > 24);
         }
     }
 
@@ -236,26 +269,22 @@ class App {
      * Handle keyboard navigation
      */
     handleKeyboardNavigation(event) {
-        // Handle Escape key
         if (event.key === 'Escape') {
-            // Close any open modals or dropdowns
             this.closeAllOverlays();
         }
 
-        // Handle Enter key on custom interactive elements
         if (event.key === 'Enter') {
-            const target = event.target;
-            if (target.hasAttribute('data-keyboard-interactive')) {
+            const { target } = event;
+            if (target instanceof HTMLElement && target.hasAttribute('data-keyboard-interactive')) {
                 target.click();
             }
         }
     }
 
     /**
-     * Close all overlays (modals, dropdowns, etc.)
+     * Close overlays or menus
      */
     closeAllOverlays() {
-        // Implementation for closing overlays
         console.log('All overlays closed');
     }
 
@@ -278,8 +307,6 @@ class App {
      */
     handleInitializationError(error) {
         console.error('App initialization failed:', error);
-        
-        // Show user-friendly error message
         this.showErrorMessage('Something went wrong. Please refresh the page.');
     }
 
@@ -287,25 +314,23 @@ class App {
      * Show error message to user
      */
     showErrorMessage(message) {
-        // Create a simple error notification
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-notification';
         errorDiv.textContent = message;
-        errorDiv.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #ef4444;
-            color: white;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            z-index: 10000;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        `;
+        errorDiv.style.cssText = [
+            'position: fixed',
+            'top: 20px',
+            'right: 20px',
+            'background: #171717',
+            'color: #ffffff',
+            'padding: 1rem 1.25rem',
+            'border-radius: 1rem',
+            'z-index: 10000',
+            'box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18)'
+        ].join(';');
 
         document.body.appendChild(errorDiv);
 
-        // Remove after 5 seconds
         setTimeout(() => {
             if (errorDiv.parentNode) {
                 errorDiv.parentNode.removeChild(errorDiv);
@@ -317,17 +342,13 @@ class App {
      * Track events for analytics
      */
     trackEvent(eventName, data = {}) {
-        // In production, you might send this to Google Analytics, etc.
         console.log('Event tracked:', eventName, data);
-        
-        // Example: gtag('event', eventName, data);
     }
 
     /**
      * Clean up resources
      */
     destroy() {
-        // Clean up event listeners and modules
         Object.values(this.modules).forEach(module => {
             if (module && typeof module.destroy === 'function') {
                 module.destroy();
@@ -339,36 +360,31 @@ class App {
     }
 }
 
-// Initialize app when DOM is ready
 const app = new App();
 
-// Initialize when DOM content is loaded
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         app.init();
     });
 } else {
-    // DOM is already loaded
     app.init();
 }
 
-// Handle page unload
 window.addEventListener('beforeunload', () => {
     app.destroy();
 });
 
-// Export for potential use in other scripts
 window.App = app;
 
-// Service Worker registration (if available)
 if ('serviceWorker' in navigator && location.protocol === 'https:') {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker
+            .register('/sw.js')
             .then(registration => {
-                console.log('SW registered: ', registration);
+                console.log('SW registered:', registration);
             })
             .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
+                console.log('SW registration failed:', registrationError);
             });
     });
 }
